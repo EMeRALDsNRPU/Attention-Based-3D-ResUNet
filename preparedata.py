@@ -19,15 +19,13 @@ class My3DDataset(Dataset):
 # targets shape: (num_samples, target_sequence_length)
 def data_loader():
 
-    tv1, data, targets = load_data()
+    data, targets = load_data()
     
     # Create the dataset and dataloader
-    tv = int(0.75*tv1)
-    trainData = My3DDataset(data[0:tv], targets[0:tv])
-    valData = My3DDataset(data[tv:], targets[tv:])
-    print(len(trainData))
-    print(len(valData))
-    trainloader = DataLoader(trainData, batch_size=1, pin_memory=False, shuffle=True)
-    valloader = DataLoader(valData, batch_size=1, pin_memory=False, shuffle=True)
-    return trainloader, valloader
+    testData = My3DDataset(data, targets)
+
+    print(len(testData))
+    testloader = DataLoader(testData, batch_size=1, pin_memory=False, shuffle=False)
+
+    return testloader
 data_loader()
